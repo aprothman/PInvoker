@@ -232,7 +232,16 @@ namespace DynamicPInvoke
         {
             if (!_initialized) throw new InvalidOperationException("FinalizeInit() must be run before making any calls.");
 
-            Result = _class.GetMethod(name, BindingFlags.Public | BindingFlags.Static).Invoke(null, args);
+            var method = _class.GetMethod(name, BindingFlags.Public | BindingFlags.Static);
+            if (null == method) {
+                throw new InvalidOperationException(name + " is not a static method on " + _class.Name + ".");
+            }
+
+            if (typeof(void) == method.ReturnType) {
+                method.Invoke(null, args);
+            } else {
+                Result = method.Invoke(null, args);
+            }
         }
 
         private void InitDefaults()
