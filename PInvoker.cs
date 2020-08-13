@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -26,10 +27,21 @@ namespace DynamicPInvoke
         private Type _class;
 
         /// <summary>
+        /// We use a BlockingCollection that wrapps a ConcurrentQueue, and we set the
+        /// maximum number of items in the queue to 1 to force each value to be read
+        /// from the data structure before a new value can be added to it.
+        /// </summary>
+        private readonly BlockingCollection<object> _results = new BlockingCollection<object>(1);
+
+        /// <summary>
         /// This is a special field that must be explicitly returned by any [PInvokable] stub
         /// methods.
         /// </summary>
-        protected object Result { get; private set; } = null;
+        protected object Result
+        {
+            get => _results.Take();
+            private set => _results.Add(value);
+        }
 
         /// <summary>
         /// The name of the library without its file extension
