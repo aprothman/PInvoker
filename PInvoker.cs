@@ -46,48 +46,129 @@ namespace DynamicPInvoke
         /// <summary>
         /// The name of the library without its file extension
         /// </summary>
-        public ArchTuple<string> DllName { get; set; }
+        private ArchTuple<string> _dllName;
+        public ArchTuple<string> DllName
+        {
+            get => _dllName;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllName = value;
+            }
+        }
 
         /// <summary>
         /// Optional prefix for the library name
         /// </summary>
-        public ArchTuple<string> DllNamePrefix { get; set; }
+        private ArchTuple<string> _dllNamePrefix;
+        public ArchTuple<string> DllNamePrefix
+        {
+            get => _dllNamePrefix;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllNamePrefix = value;
+            }
+        }
 
         /// <summary>
         /// Optional suffix for the library name
         /// </summary>
-        public ArchTuple<string> DllNameSuffix { get; set; }
+        private ArchTuple<string> _dllNameSuffix;
+        public ArchTuple<string> DllNameSuffix
+        {
+            get => _dllNameSuffix;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllNameSuffix = value;
+            }
+        }
 
         /// <summary>
         /// Optional path to the library
         /// </summary>
-        public ArchTuple<string> DllPath { get; set; }
+        private ArchTuple<string> _dllPath;
+        public ArchTuple<string> DllPath
+        {
+            get => _dllPath;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllPath = value;
+            }
+        }
 
         /// <summary>
         /// Calling convention for the library's exported functions
         /// </summary>
-        public ArchTuple<CallingConvention> DllCallingConv { get; set; }
+        private ArchTuple<CallingConvention> _dllCallingConv;
+        public ArchTuple<CallingConvention> DllCallingConv
+        {
+            get => _dllCallingConv;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllCallingConv = value;
+            }
+        }
 
         /// <summary>
         /// Character set for strings in calls to the library
         /// </summary>
-        public ArchTuple<CharSet> DllCharSet { get; set; }
+        private ArchTuple<CharSet> _dllCharSet;
+        public ArchTuple<CharSet> DllCharSet
+        {
+            get => _dllCharSet;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _dllCharSet = value;
+            }
+        }
 
         /// <summary>
         /// String name transformation function used to generate the library's
         /// exported function name from the name of the PInvokable method
         /// </summary>
-        public ArchTuple<Func<string, string>> MethodNameTransform { get; set; }
+        private ArchTuple<Func<string, string>> _methodNameTransform;
+        public ArchTuple<Func<string, string>> MethodNameTransform
+        {
+            get => _methodNameTransform;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _methodNameTransform = value;
+            }
+        }
 
         /// <summary>
         /// Optional prefix for the library's exported function names
         /// </summary>
-        public ArchTuple<string> MethodNamePrefix { get; set; }
+        private ArchTuple<string> _methodNamePrefix;
+        public ArchTuple<string> MethodNamePrefix
+        {
+            get => _methodNamePrefix;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _methodNamePrefix = value;
+            }
+        }
 
         /// <summary>
         /// Optional suffix for the library's exported function names
         /// </summary>
-        public ArchTuple<string> MethodNameSuffix { get; set; }
+        private ArchTuple<string> _methodNameSuffix;
+        public ArchTuple<string> MethodNameSuffix
+        {
+            get => _methodNameSuffix;
+            set {
+                if (_initialized) throw new InvalidOperationException("This property can't be changed after initialization.");
+
+                _methodNameSuffix = value;
+            }
+        }
 
         protected PInvoker()
         {
@@ -133,8 +214,7 @@ namespace DynamicPInvoke
                         nativeCharSet: DllCharSet[_arch]
                     );
                     methodBuilder.SetImplementationFlags(methodBuilder.GetMethodImplementationFlags()
-                                                       | MethodImplAttributes.PreserveSig
-                                                       | MethodImplAttributes.);
+                                                       | MethodImplAttributes.PreserveSig);
                 }
             }
 
