@@ -34,7 +34,10 @@ namespace DynamicPInvoke
         }
     };
 
-    internal sealed class PInvokerContextProperty : IContextProperty, IContributeObjectSink, IContextPropertyActivator
+    internal sealed class PInvokerContextProperty :
+        IContextProperty,
+        IContributeObjectSink,
+        IContextPropertyActivator
     {
         private PInvokerSink _sink = null;
 
@@ -78,6 +81,7 @@ namespace DynamicPInvoke
         public void CollectFromServerContext(IConstructionReturnMessage msg)
         {
             var retProxy = msg.ReturnValue as ObjRef;
+
             try {
                 _sink.SetCallable((IExternalCallable)RemotingServices.Unmarshal(retProxy, true));
             }
@@ -96,17 +100,16 @@ namespace DynamicPInvoke
 
     internal sealed class PInvokerSink : IMessageSink
     {
-        private IMessageSink _next;
         private IExternalCallable _pinvoker = null;
 
         public PInvokerSink(IMessageSink next)
         {
-            _next = next;
+            NextSink = next;
         }
 
         #region IMessageSink
 
-        public IMessageSink NextSink => _next;
+        public IMessageSink NextSink { get; }
 
         public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
@@ -122,7 +125,7 @@ namespace DynamicPInvoke
                     DoPInvoke(call);
                 }
             }
-            return _next.SyncProcessMessage(msg);
+            return NextSink.SyncProcessMessage(msg);
         }
 
         #endregion // IMessageSink

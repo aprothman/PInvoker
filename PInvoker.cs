@@ -16,7 +16,7 @@ namespace DynamicPInvoke
     {
         protected static int s_instanceCount = 0;
 
-        private readonly Architecture _arch = Environment.Is64BitProcess ? Architecture.x64 : Architecture.x86;
+        private readonly Architecture _arch = RuntimeInformation.OSArchitecture;
         private bool _initialized = false;
 
         private readonly Type _hostClass;
@@ -246,18 +246,18 @@ namespace DynamicPInvoke
 
         private void InitDefaults()
         {
-            DllName = new ArchTuple<string>("");
-            DllNamePrefix = new ArchTuple<string>("");
-            DllNameSuffix = new ArchTuple<string> {
-                [Architecture.x86] = "",
-                [Architecture.x64] = "64"
+            DllName = "";
+            DllNamePrefix = "";
+            DllNameSuffix = new ArchTuple<string>("") {
+                [Architecture.X64] = "64",
+                [Architecture.Arm64] = "64",
             };
-            DllPath = new ArchTuple<string>("");
-            DllCallingConv = new ArchTuple<CallingConvention>(CallingConvention.StdCall);
-            DllCharSet = new ArchTuple<CharSet>(CharSet.Unicode);
-            MethodNameTransform = new ArchTuple<Func<string, string>>(NameTransforms.NoOp);
-            MethodNamePrefix = new ArchTuple<string>("");
-            MethodNameSuffix = new ArchTuple<string>("");
+            DllPath = "";
+            DllCallingConv = CallingConvention.StdCall;
+            DllCharSet = CharSet.Unicode;
+            MethodNameTransform = NameTransforms.NoOp;
+            MethodNamePrefix = "";
+            MethodNameSuffix = "";
         }
 
         private void BuildAssembly(string name)

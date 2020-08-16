@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace DynamicPInvoke
 {
-    public enum Architecture
-    {
-        x86,
-        x64
-    }
-
     public class ArchTuple<T>
     {
-        private Dictionary<Architecture, T> _data;
+        private readonly Dictionary<Architecture, T> _data;
 
         public ArchTuple()
         {
-            _data = new Dictionary<Architecture, T>(2);
+            _data = new Dictionary<Architecture, T>(4);
         }
 
         public ArchTuple(T value)
         {
-            _data = new Dictionary<Architecture, T>(2);
+            _data = new Dictionary<Architecture, T>(4);
             SetValues(value);
         }
 
