@@ -274,7 +274,7 @@ namespace DynamicPInvoke
             return "_PInvoker_" + hostClass.Name + "_" + s_instanceCount++.ToString();
         }
 
-        private string ComposeDllName()
+        internal string ComposeDllName()
         {
             var name = DllName[_arch];
             if (string.IsNullOrEmpty(name)) {
