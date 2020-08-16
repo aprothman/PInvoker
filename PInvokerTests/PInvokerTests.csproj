@@ -9,7 +9,7 @@
     <ProjectGuid>{365E4F09-CA2D-4978-9945-B6D6D733EDBF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PInvokerTests</RootNamespace>
+    <RootNamespace>DynamicPInvoke.Tests</RootNamespace>
     <AssemblyName>PInvokerTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

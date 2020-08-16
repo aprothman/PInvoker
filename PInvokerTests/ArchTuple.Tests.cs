@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using DynamicPInvoke;
 using NUnit.Framework;
 
-namespace PInvokerTests
+namespace DynamicPInvoke.Tests
 {
     [TestFixture]
     public class ArchTupleTests

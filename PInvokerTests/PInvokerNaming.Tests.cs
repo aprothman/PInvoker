@@ -1,14 +1,11 @@
-﻿using System;
+﻿using System.Runtime.InteropServices;
 using NUnit.Framework;
 
-namespace PInvokerTests
+namespace DynamicPInvoke.Tests
 {
     [TestFixture]
     public class PInvokerNamingTests
     {
-        [Test]
-        public void TestMethod1()
-        {
-        }
+
     }
 }
