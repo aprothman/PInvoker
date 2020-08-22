@@ -123,7 +123,7 @@ namespace DynamicPInvoke.Tests
         }
 
         [Test]
-        public void Implicit_String_Converts()
+        public void Implicit_String_ConvertsTo()
         {
             ArchTuple<string> tuple = "test";
 
@@ -135,7 +135,7 @@ namespace DynamicPInvoke.Tests
 
 
         [Test]
-        public void Implicit_Int_Converts()
+        public void Implicit_Int_ConvertsTo()
         {
             ArchTuple<int> tuple = 1;
 
@@ -146,7 +146,7 @@ namespace DynamicPInvoke.Tests
         }
 
         [Test]
-        public void Implicit_Enum_Converts()
+        public void Implicit_Enum_ConvertsTo()
         {
             ArchTuple<CharSet> tuple = CharSet.Auto;
 
@@ -154,6 +154,55 @@ namespace DynamicPInvoke.Tests
             Assert.AreEqual(CharSet.Auto, tuple[Architecture.X64]);
             Assert.AreEqual(CharSet.Auto, tuple[Architecture.Arm]);
             Assert.AreEqual(CharSet.Auto, tuple[Architecture.Arm64]);
+        }
+
+        [Test]
+        public void Implicit_String_ConvertsFrom()
+        {
+            var tuple = new ArchTuple<string>() {
+                [Architecture.X86] = "test1",
+                [Architecture.X64] = "test2",
+                [Architecture.Arm] = "test3",
+                [Architecture.Arm64] = "test4",
+            };
+            string converted = tuple;
+
+            var expected = tuple[RuntimeInformation.OSArchitecture];
+
+            Assert.AreEqual(expected, converted);
+        }
+
+
+        [Test]
+        public void Implicit_Int_ConvertsFrom()
+        {
+            var tuple = new ArchTuple<int>() {
+                [Architecture.X86] = 1,
+                [Architecture.X64] = 2,
+                [Architecture.Arm] = 3,
+                [Architecture.Arm64] = 4,
+            };
+            int converted = tuple;
+
+            var expected = tuple[RuntimeInformation.OSArchitecture];
+
+            Assert.AreEqual(expected, converted);
+        }
+
+        [Test]
+        public void Implicit_Enum_ConvertsFrom()
+        {
+            var tuple = new ArchTuple<CharSet>() {
+                [Architecture.X86] = CharSet.Ansi,
+                [Architecture.X64] = CharSet.Unicode,
+                [Architecture.Arm] = CharSet.Auto,
+                [Architecture.Arm64] = CharSet.Unicode,
+            };
+            CharSet converted = tuple;
+
+            var expected = tuple[RuntimeInformation.OSArchitecture];
+
+            Assert.AreEqual(expected, converted);
         }
     }
 }
