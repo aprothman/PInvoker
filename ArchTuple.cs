@@ -33,5 +33,6 @@ namespace DynamicPInvoke
         }
 
         public static implicit operator ArchTuple<T>(T value) => new ArchTuple<T>(value);
+        public static implicit operator T(ArchTuple<T> tuple) => tuple[RuntimeInformation.OSArchitecture];
     }
 }
