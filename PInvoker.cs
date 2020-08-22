@@ -199,9 +199,10 @@ namespace DynamicPInvoke
                         paramTypes[i] = args[i].ParameterType;
                     }
 
-                    var entryName = MethodNamePrefix[_arch] 
-                                  + MethodNameTransform[_arch](method.Name)
-                                  + MethodNameSuffix[_arch];
+                    //var entryName = MethodNamePrefix[_arch] 
+                    //              + MethodNameTransform[_arch](method.Name)
+                    //              + MethodNameSuffix[_arch];
+                    var entryName = ComposeMethodName(method.Name);
                     var methodBuilder = _classBuilder.DefinePInvokeMethod(
                         name: method.Name,
                         dllName: dllName,
@@ -289,6 +290,13 @@ namespace DynamicPInvoke
             name = DllPath[_arch] + DllNamePrefix[_arch] + name + DllNameSuffix[_arch] + ".dll";
 
             return name;
+        }
+
+        internal string ComposeMethodName(string baseName)
+        {
+            return MethodNamePrefix[_arch]
+                 + MethodNameTransform[_arch](baseName)
+                 + MethodNameSuffix[_arch];
         }
     }
 }
