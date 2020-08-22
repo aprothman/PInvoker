@@ -285,7 +285,8 @@ namespace DynamicPInvoke
                     throw new InvalidOperationException("Couldn't infer the Dll name");
                 }
             }
-            name = DllNamePrefix[_arch] + name + DllNameSuffix[_arch] + ".dll";
+
+            name = DllPath[_arch] + DllNamePrefix[_arch] + name + DllNameSuffix[_arch] + ".dll";
 
             return name;
         }
