@@ -57,7 +57,7 @@
     <Compile Include="NameTransforms.Tests.cs" />
     <Compile Include="PInvokerNaming.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinApiPInvokerTests.cs" />
+    <Compile Include="WinApiPInvoker.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
